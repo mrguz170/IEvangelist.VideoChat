@@ -23,9 +23,15 @@ namespace IEvangelist.VideoChat
 
             services.Configure<TwilioSettings>(settings =>
                     {
+                        /*
                         settings.AccountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID");
                         settings.ApiSecret = Environment.GetEnvironmentVariable("TWILIO_API_SECRET");
                         settings.ApiKey = Environment.GetEnvironmentVariable("TWILIO_API_KEY");
+                        */
+                        settings.AccountSid = _configuration["TwilioAccountSid"];
+                        settings.ApiSecret = _configuration["TwilioApiSecret"];
+                        settings.ApiKey = _configuration["TwilioApiKey"];
+
                     })
                     .AddTransient<IVideoService, VideoService>()
                     .AddSpaStaticFiles(config => config.RootPath = "ClientApp/dist");
